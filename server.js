@@ -1,5 +1,5 @@
 // server.js
-
+require('dotenv').config()
 // set up ======================================================================
 // get all the tools we need
 let express  = require('express');
@@ -15,7 +15,10 @@ let cookieParser = require('cookie-parser');
 let bodyParser   = require('body-parser'); // automatically included w express now - line can be deleted
 let session      = require('express-session');
 
-let configDB = require('./config/.env');
+const configDB = {
+  url: process.env.MONGODB_URI,
+  dbName: process.env.DBNAME
+};
 let db
 
 // configuration ===============================================================
