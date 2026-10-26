@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>21 Savage Fan Site</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="page-header text-center">
+            <h1><span class="fa fa-anchor"></span> Profile Page</h1>
+            <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+        </div>
+
+        <div class="row">
+
+            <!-- LOCAL INFORMATION -->
+            <div class="col-sm-6">
+                <div class="well">
+                    <h3><span class="fa fa-user"></span> Local</h3>
+
+                    <% if (user.local.email) { %>
+                        <p>
+                            <strong>id</strong>: <%= user._id %><br>
+                                <strong>email</strong>: <%= user.local.email %><br>
+                                    <strong>password</strong>:
+                        </p>
+
+                        <a href="/unlink/local" class="btn btn-default">Unlink</a>
+                        <% } else { %>
+                            <a href="/connect/local" class="btn btn-default">Connect Local</a>
+                            <% } %>
+
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <h3>Messages</h3>
+                <ul class="messages">
+                    <% for(var i=0; i<books.length; i++) {%>
+                        <li class="message">
+
+                            <span data-user-id="<%= books[i]._id %>">
+                                <%= books[i].title %>
+                            </span>
+                            <span>
+                                <%= books[i].author %>
+                            </span>
+                            <span>
+                                <%= books[i].isbn %>
+                            </span>
+                            <span>
+                                <input type="range" class="rate" id="rating" name="rating" min="0" max="10" />
+                            </span>
+                            <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
+                            <span><i class="fa fa-trash" aria-hidden="true">x</i></span>
+                            <span><%= books[i].rating %></span>
+                            <!-- </i> -->
+                        </li>
+                        <% } %>
+                </ul>
+
+                <h2>Add a book</h2>
+                <% if (user.local.email) { %>
+
+                    <!-- Title
+                    	Author
+                    	ISBN - Optional
+                    	Date started
+                        Status - Not read , In Progress, Finished
+                    	
+                    	Genre
+                    
+                        in update:
+                    	Rating  1/10 or 1-5? -->
+                    <!-- Date Finished -->
+
+                    <form action="/messages" method="POST">
+                        <input type="text" value="<%= user.local.email %>" name="name">
+                        <input type="text" placeholder="Book Title" name="title">
+                        <input type="text" placeholder="Author" name="author">
+                        <!-- optional -->
+                        <input type="number" placeholder="ISBN" name="isbn">
+                        <!-- <label for="start-date">Start Date</label>
+                        <input type="date" id="start-date"> -->
+                        <!-- <label for="rating">Rating</label>
+                        <input type="range" id="rating" name="rating" min="0" max="10" /> -->
+                        <!-- <fieldset>
+                         <legend>Reading Progress:</legend>
+
+                        <div>
+                            <input type="radio" id="not-started" name="status" value="not-started" />
+                            <label for="not-started">Not started</label>
+                        </div>
+
+                        <div>
+                            <input type="radio" id="in-progress" name="status" value="in-progress" />
+                            <label for="in-progress">Currently reading</label>
+                        </div>
+
+                        <div>
+                            <input type="radio" id="finished" name="status" value="finished" />
+                            <label for="finished">Finished!</label>
+                        </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Show off</legend>
+                            <div>
+                                <input type="checkbox" id="show-book" name="show-book" checked>
+                                <label for="show-book">Display on bookshelf</label>
+                            </div>
+                        </fieldset> -->
+                        <button type="submit">Submit</button>
+                    </form>
+            </div>
+            <% } %>
+
+        </div>
+
+        <script src="main.js"></script>
+
+</body>
+
+</html>
