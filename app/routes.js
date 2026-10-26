@@ -29,13 +29,15 @@ module.exports = function (app, passport, db, ObjectID) {
 
   // message board routes ===============================================================
   // match to what is being posted in messages
-  app.post('/messages', (req, res) => {
+  app.post('/myBooks', (req, res) => {
     console.log(req)
     db.collection('books').save({
       name: req.body.name,
       title: req.body.title,
       author: req.body.author,
-      ISBN: req.body.isbn,
+      progress: req.body.progress,
+      startDate: req.body.startDate,
+      displayBook: req.body.displayBook,
       rating: 0, 
     }, (err, result) => {
       if (err) return console.log(err)
@@ -81,12 +83,11 @@ module.exports = function (app, passport, db, ObjectID) {
       })
   })
 
-  app.delete('/messages', (req, res) => {
-    console.log(req.body.id)
+  app.delete('/myBooks', (req, res) => {
+
+    console.log(req.body.bookId)
     db.collection('books').findOneAndDelete({ 
-      _id: new ObjectID(req.body.id)
-      // name: req.body.name, 
-      // msg: req.body.msg 
+      _id: new ObjectID(req.body.bookId) 
     }, (err, result) => {
       if (err) return res.send(500, err)
       res.send('Message deleted!')
