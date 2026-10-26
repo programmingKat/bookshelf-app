@@ -12,7 +12,7 @@
 
 ## How to Use
 
-1. Check out the [bookshelf app here](https://picky-v3j9.onrender.com/).
+1. Check out the [bookshelf app here](https://bookshelf-app-lf72.onrender.com).
 2. Create your account / sign up
 3. Log in to your account
   
